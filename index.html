@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Happy Birthday, Cherlyn</title>
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8ec 100%);
+            color: #5a4a4a;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInDown 1.2s ease forwards;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: #d4959c;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: #7a6a6a;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        /* ===== BIRTHDAY MESSAGE SECTION ===== */
+        .message-container {
+            max-width: 700px;
+            margin: 0 auto 80px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(212, 149, 156, 0.15);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s ease 0.3s forwards;
+        }
+
+        .message-container p {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #5a4a4a;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .message-container p:last-child {
+            margin-bottom: 0;
+            margin-top: 25px;
+            font-style: italic;
+            color: #d4959c;
+            font-size: 1.1em;
+        }
+
+        /* ===== GALLERY SECTION ===== */
+        .gallery-section {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.6s forwards;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.2em;
+            color: #d4959c;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Gallery slider container */
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 30px 20px 20px;
+            font-size: 1.1em;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Gallery navigation buttons */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #d4959c;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .gallery-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        /* Gallery dots indicator */
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 149, 156, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .dot.active {
+            background: #d4959c;
+            transform: scale(1.2);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7a6a6a;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.9s forwards;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 20px 40px;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .message-container {
+                padding: 30px 25px;
+                margin-bottom: 60px;
+            }
+
+            .message-container p {
+                font-size: 1.05em;
+            }
+
+            .gallery-title {
+                font-size: 1.8em;
+            }
+
+            .gallery-item img {
+                height: 350px;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+
+            .gallery-nav.prev {
+                left: 10px;
+            }
+
+            .gallery-nav.next {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 40px 15px 30px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+                letter-spacing: 1px;
+            }
+
+            .message-container {
+                padding: 25px 20px;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER WITH TITLE ===== -->
+    <header class="header">
+        <h1>Happy Birthday, Cherlyn</h1>
+        <p class="subtitle">Today we celebrate you ✨</p>
+    </header>
+
+    <!-- ===== HEARTFELT MESSAGE ===== -->
+    <section class="message-container">
+        <p>
+            On this special day, I want you to know how incredibly grateful I am for knowing you. 
+            I enjoy every moment with you, every conversation we shared lights up my mood, 
+            and every day with you is a gift I cherish.
+        </p>
+        <p>
+            You bring so much joy, laughter, and wisdom into my life, always teaching me things I never knew before
+            and thanks for being patient with me as I'am slow and weird, I'm very thankful for that. 
+            Don't forget to always be kind to those around you. I hope this year brings you all the happiness you deserve.
+        </p>
+        <p>
+            Happy Birthday, Maring. Here's to you, to us, and to all the beautiful memories we'll create together. ❤️
+        </p>
+        <p>
+            sincerely rhyl,
+        </p>
+    </section>
+
+    <!-- ===== PHOTO GALLERY ===== -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Gallery</h2>
+        
+        <div class="gallery-slider">
+            <div class="gallery-track" id="galleryTrack">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/XpatMMG.jpeg" alt="Memory 1">
+                    <div class="gallery-caption">Gorgeous</div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/dRBZDYC.jpeg" alt="Memory 2">
+                    <div class="gallery-caption">cutesy</div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/mrui6fo.jpeg" alt="Memory 3">
+                    <div class="gallery-caption">demure</div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/rYvCTqx.jpeg" alt="Memory 4">
+                    <div class="gallery-caption">fav ko to</div>
+                </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <button class="gallery-nav prev" onclick="moveSlide(-1)">‹</button>
+            <button class="gallery-nav next" onclick="moveSlide(1)">›</button>
+        </div>
+        
+        <!-- Dots Indicator -->
+        <div class="gallery-dots" id="galleryDots"></div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>For you 💕</p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT FOR GALLERY ===== -->
+    <script>
+        // Gallery state variables
+        let currentSlide = 0;
+        const track = document.getElementById('galleryTrack');
+        const slides = document.querySelectorAll('.gallery-item');
+        const dotsContainer = document.getElementById('galleryDots');
+        const totalSlides = slides.length;
+
+        // Create dot indicators dynamically
+        function createDots() {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update the active dot
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Move to a specific slide
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            
+            const offset = -currentSlide * 100;
+            track.style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
+
+        // Move slide by direction (-1 for prev, 1 for next)
+        function moveSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            goToSlide(currentSlide);
+        }
+
+        // Auto-advance slides every 5 seconds
+        function autoAdvance() {
+            setInterval(() => {
+                moveSlide(1);
+            }, 5000);
+        }
+
+        // Initialize gallery on page load
+        window.onload = function() {
+            createDots();
+            autoAdvance();
+        };
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') moveSlide(-1);
+            if (e.key === 'ArrowRight') moveSlide(1);
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) moveSlide(1);
+            if (touchEndX > touchStartX + 50) moveSlide(-1);
+        }
+    </script>
+</body>
+</html> 
